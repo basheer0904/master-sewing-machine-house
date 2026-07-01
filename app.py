@@ -29,6 +29,7 @@ def home():
     CREATE TABLE IF NOT EXISTS products(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
+        category TEXT,
         price INTEGER,
         image TEXT
 )
@@ -45,36 +46,18 @@ def home():
         )
 
     elif category == "machines":
-
-        cursor.execute(
-            "SELECT * FROM products WHERE name LIKE '%Machine%'"
-        )
+        cursor.execute("SELECT * FROM products WHERE category='machines'")
 
     elif category == "spares":
+        cursor.execute("SELECT * FROM products WHERE category='spares'")
 
-        cursor.execute("""
-        SELECT * FROM products
-        WHERE name LIKE '%Bobbin%'
-        OR name LIKE '%Needle%'
-        OR name LIKE '%Presser%'
-        OR name LIKE '%Belt%'
-        OR name LIKE '%Thread%'
-        """)
-
-    elif category == "oil":
-
-        cursor.execute(
-            "SELECT * FROM products WHERE name LIKE '%Oil%'"
-        )
+   elif category == "oil":
+        cursor.execute("SELECT * FROM products WHERE category='oil'")
 
     elif category == "iron":
-
-        cursor.execute(
-            "SELECT * FROM products WHERE name LIKE '%Iron%'"
-        )
-
+        cursor.execute("SELECT * FROM products WHERE category='iron'")
+        
     else:
-
         cursor.execute("SELECT * FROM products")
 
     products = cursor.fetchall()
@@ -122,27 +105,27 @@ def init():
     cursor.execute("DELETE FROM products")
 
     items = [
-        ("Singer Sewing Machine",12000, "images/singer.jpg"),
-        ("Usha Janome Sewing Machine",14500,"images/usha.jpg" ),
-        ("Brother Sewing Machine",25000, "images/brother.jpg"),
-        ("Jack Industrial Machine",38000,"images/jack.jpg"),
-        ("Juki Industrial Machine",42000, "images/juki.jpg"),
-        ("Overlock Machine",28000, "images/overlock.jpg"),
-        ("Interlock Machine",45000, "images/interlock.jpg"),
-        ("Embroidery Machine",65000, "images/embroidery.jpg"),
-        ("Bobbin",50, "images/bobbin.jpg"),
-        ("Bobbin Case",180, "images/bobbincase.jpg"),
-        ("Needle Pack",120, "images/needle.jpg"),
-        ("Presser Foot",250,"images/foot.jpg"),
-        ("Machine Belt",180, "images/belt.jpg"),
-        ("Machine Oil",120, "images/oil.jpg"),
-        ("Tailor Scissors",650, "images/scissors.jpg"),
-        ("Steam Iron Box",3500, "images/iron.jpg"),
-        ("Thread Cone",180, "images/thread.jpg")
+        ("Singer Sewing Machine","machines",12000, "images/singer.jpg"),
+        ("Usha Janome Sewing Machine","machines",14500,"images/usha.jpg" ),
+        ("Brother Sewing Machine","machines",25000, "images/brother.jpg"),
+        ("Jack Industrial Machine","machines",38000,"images/jack.jpg"),
+        ("Juki Industrial Machine","machines",42000, "images/juki.jpg"),
+        ("Overlock Machine","machines",28000, "images/overlock.jpg"),
+        ("Interlock Machine","machines",45000, "images/interlock.jpg"),
+        ("Embroidery Machine","machines",65000, "images/embroidery.jpg"),
+        ("Bobbin","spares",50, "images/bobbin.jpg"),
+        ("Bobbin Case","spares",180, "images/bobbincase.jpg"),
+        ("Needle Pack","spares",120, "images/needle.jpg"),
+        ("Presser Foot","spares",250,"images/foot.jpg"),
+        ("Machine Belt","spares",180, "images/belt.jpg"),
+        ("Machine Oil","oil",120,"images/oil.jpg"),
+        ("Tailor Scissors","spares",650, "images/scissors.jpg"),
+        ("Steam Iron Box","iron",3500, "images/iron.jpg"),
+        ("Thread Cone","spares",180, "images/thread.jpg")
     ]
 
     cursor.executemany(
-        "INSERT INTO products(name,price, image) VALUES(?,?,?)",
+        "INSERT INTO products(name,category,price, image) VALUES(?,?,?,?)",
         items
     )
 
@@ -212,12 +195,12 @@ def cart():
 
         if product:
 
-            subtotal = product[2] * qty
+            subtotal = product[3] * qty
 
             cart_products.append({
                 "id": product[0],
                 "name": product[1],
-                "price": product[2],
+                "price": product[3],
                 "qty": qty,
                 "subtotal": subtotal
             })
