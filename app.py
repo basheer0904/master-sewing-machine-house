@@ -34,6 +34,7 @@ def home():
         image TEXT
 )
 """)
+    cursor.execute("DELETE FROM products")
 
     search = request.args.get("search", "")
     category = request.args.get("category", "")
