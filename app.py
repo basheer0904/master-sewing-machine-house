@@ -51,7 +51,7 @@ def home():
     elif category == "spares":
         cursor.execute("SELECT * FROM products WHERE category='spares'")
 
-   elif category == "oil":
+    elif category == "oil":
         cursor.execute("SELECT * FROM products WHERE category='oil'")
 
     elif category == "iron":
@@ -62,12 +62,8 @@ def home():
 
     products = cursor.fetchall()
 
-    cart = session.get("cart", {})
-
-    if isinstance(cart, list):
-        cart = {}
-        session["cart"] = cart
-
+    cart = get_cart()
+   
     total_items = 0
     total_bill = 0
 
