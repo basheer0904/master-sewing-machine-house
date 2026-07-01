@@ -191,7 +191,7 @@ def cart():
 
         if product:
 
-            subtotal = product[3] * qty
+            subtotal = int(product[3]) * int(qty)
 
             cart_products.append({
                 "id": product[0],
