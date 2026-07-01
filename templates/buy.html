@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buy Product</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            margin:0;
+        }
+
+        .container{
+            width:450px;
+            margin:60px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px gray;
+            text-align:center;
+        }
+
+        h1{
+            color:#0d6efd;
+        }
+
+        h2{
+            color:#333;
+        }
+
+        h3{
+            color:green;
+        }
+
+        button{
+            background:#0d6efd;
+            color:white;
+            border:none;
+            padding:12px 25px;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#084298;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        .success{
+            color:green;
+            font-size:20px;
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🧵 Master Sewing Machine House</h1>
+
+<p class="success">✅ Order Placed Successfully!</p>
+
+<hr>
+
+<h2>{{ product[1] }}</h2>
+
+<h3>Price : ₹ {{ product[2] }}</h3>
+
+<p>Thank you for shopping with us.</p>
+
+<br>
+
+<a href="/">
+    <button>⬅ Back to Home</button>
+</a>
+
+</div>
+
+</body>
+</html>

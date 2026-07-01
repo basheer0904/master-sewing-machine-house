@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+
+    <style>
+        body{
+            font-family:Arial,sans-serif;
+            background:#f2f2f2;
+            margin:0;
+        }
+
+        header{
+            background:#0d6efd;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        table{
+            width:90%;
+            margin:20px auto;
+            border-collapse:collapse;
+            background:white;
+        }
+
+        th,td{
+            border:1px solid #ddd;
+            padding:12px;
+            text-align:center;
+        }
+
+        th{
+            background:#0d6efd;
+            color:white;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        .btn{
+            padding:8px 15px;
+            border-radius:5px;
+            color:white;
+            font-weight:bold;
+        }
+
+        .plus{
+            background:green;
+        }
+
+        .minus{
+            background:orange;
+        }
+
+        .remove{
+            background:red;
+        }
+
+        .checkout{
+            background:#0d6efd;
+            padding:12px 25px;
+        }
+
+        h2{
+            text-align:center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🛒 Master Sewing Machine House</h1>
+
+</header>
+
+<table>
+
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Subtotal</th>
+<th>Action</th>
+</tr>
+
+{% for item in cart_products %}
+
+<tr>
+
+<td>{{ item.name }}</td>
+
+<td>₹ {{ item.price }}</td>
+
+<td>
+
+<a class="btn minus" href="/decrease/{{ item.id }}">-</a>
+
+<b>{{ item.qty }}</b>
+
+<a class="btn plus" href="/increase/{{ item.id }}">+</a>
+
+</td>
+
+<td>
+
+₹ {{ item.subtotal }}
+
+</td>
+
+<td>
+
+<a class="btn remove" href="/remove/{{ item.id }}">
+Remove
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h2>Total Products : {{ total_items }}</h2>
+
+<h2>Total Bill : ₹ {{ total_bill }}</h2>
+
+<div style="text-align:center;margin:30px;">
+
+<a class="btn checkout" href="/">
+Continue Shopping
+</a>
+
+&nbsp;&nbsp;
+
+<a class="btn checkout" href="/buy/1">
+Checkout
+</a>
+
+</div>
+
+</body>
+</html>
